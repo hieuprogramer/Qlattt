@@ -8,6 +8,7 @@ package jupdemo;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.net.ssl.HttpsURLConnection;
@@ -209,13 +210,23 @@ public class JupDemo extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Socket sc = new Socket("192.168.0.197",1024);
+                } catch (IOException ex) {
+                }
+            }
+            
+        }).start();
         java.awt.EventQueue.invokeLater(new Runnable() {
 
             public void run() {
                 new JupDemo().setVisible(true);
             }
         });
-        System.out.println("hello");
+        
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
