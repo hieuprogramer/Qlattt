@@ -10,6 +10,10 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
 import javax.swing.JOptionPane;
 import jupar.Downloader;
 import jupar.Updater;
@@ -31,7 +35,27 @@ public class JupDemo extends javax.swing.JFrame {
          * Check for new version
          */
         
-        
+        TrustManager[] trustAllCerts = new TrustManager[]{
+            new X509TrustManager() {
+                public java.security.cert.X509Certificate[] getAcceptedIssuers() {
+                    return null;
+                }
+                public void checkClientTrusted(
+                    java.security.cert.X509Certificate[] certs, String authType) {
+                }
+                public void checkServerTrusted(
+                    java.security.cert.X509Certificate[] certs, String authType) {
+                }
+            }
+        };
+
+        // Activate the new trust manager
+        try {
+            SSLContext sc = SSLContext.getInstance("SSL");
+            sc.init(null, trustAllCerts, new java.security.SecureRandom());
+            HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
+        } catch (Exception e) {
+        }
         int answer = -1;
         Release release = new Release();
         release.setpkgver("1.0");
@@ -39,7 +63,7 @@ public class JupDemo extends javax.swing.JFrame {
         ReleaseXMLParser parser = new ReleaseXMLParser();
         try {
             Release current =
-                    parser.parse("http://localhost/hieu/fullv2/latest.xml", Modes.URL);
+                    parser.parse("https://github.com/hieuprogramer/Qlattt/releases/download/App/latest.xml", Modes.URL);
             if (current.compareTo(release) > 0) {
                 answer =
                         JOptionPane.showConfirmDialog(rootPane, "A new version of this"
@@ -51,7 +75,7 @@ public class JupDemo extends javax.swing.JFrame {
                          * Download needed files
                          */
                         Downloader dl = new Downloader();
-                        dl.download("http://localhost/hieu/fullv2/files.xml", "tmp", Modes.URL);
+                        dl.download("https://github.com/hieuprogramer/Qlattt/releases/download/App/files.xml", "tmp", Modes.URL);
                         System.out.println("oke");
                         break;
                     case 1:
@@ -191,6 +215,7 @@ public class JupDemo extends javax.swing.JFrame {
                 new JupDemo().setVisible(true);
             }
         });
+        System.out.println("hello");
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
