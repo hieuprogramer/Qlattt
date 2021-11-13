@@ -60,7 +60,7 @@ public class JupDemo extends javax.swing.JFrame {
         int answer = -1;
         Release release = new Release();
         release.setpkgver("1.0");
-        release.setPkgrel("1");
+        release.setPkgrel("3");
         ReleaseXMLParser parser = new ReleaseXMLParser();
         try {
             Release current =
