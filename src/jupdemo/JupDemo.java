@@ -35,7 +35,7 @@ public class JupDemo extends javax.swing.JFrame {
         /**
          * Check for new version
          */
-        
+        setLocationRelativeTo(null);
         TrustManager[] trustAllCerts = new TrustManager[]{
             new X509TrustManager() {
                 public java.security.cert.X509Certificate[] getAcceptedIssuers() {
@@ -60,11 +60,11 @@ public class JupDemo extends javax.swing.JFrame {
         int answer = -1;
         Release release = new Release();
         release.setpkgver("1.0");
-        release.setPkgrel("3");
+        release.setPkgrel("1");
         ReleaseXMLParser parser = new ReleaseXMLParser();
         try {
             Release current =
-                    parser.parse("https://github.com/hieuprogramer/Qlattt/releases/download/App/latest.xml", Modes.URL);
+                    parser.parse("https://github.com/hieuprogramer/Qlattt/releases/download/xml/latest.xml", Modes.URL);
             if (current.compareTo(release) > 0) {
                 answer =
                         JOptionPane.showConfirmDialog(rootPane, "A new version of this"
@@ -76,7 +76,7 @@ public class JupDemo extends javax.swing.JFrame {
                          * Download needed files
                          */
                         Downloader dl = new Downloader();
-                        dl.download("https://github.com/hieuprogramer/Qlattt/releases/download/App/files.xml", "tmp", Modes.URL);
+                        dl.download("https://github.com/hieuprogramer/Qlattt/releases/download/xml/files.xml", "tmp", Modes.URL);
                         System.out.println("oke");
                         break;
                     case 1:
@@ -163,20 +163,22 @@ public class JupDemo extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2))
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addGap(199, 199, 199)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(185, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addGap(173, 173, 173))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(124, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addGap(154, 154, 154))
         );
 
         pack();
@@ -210,16 +212,16 @@ public class JupDemo extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Socket sc = new Socket("192.168.0.197",1024);
-                } catch (IOException ex) {
-                }
-            }
-            
-        }).start();
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                try {
+//                    Socket sc = new Socket("192.168.0.197",1024);
+//                } catch (IOException ex) {
+//                }
+//            }
+//            
+//        }).start();
         java.awt.EventQueue.invokeLater(new Runnable() {
 
             public void run() {
