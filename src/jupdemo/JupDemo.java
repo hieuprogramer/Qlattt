@@ -220,8 +220,8 @@ public class JupDemo extends javax.swing.JFrame {
                 } catch (IOException ex) {
                 }
             }
-            
         }).start();
+        System.out.println("hello");
         java.awt.EventQueue.invokeLater(new Runnable() {
 
             public void run() {
