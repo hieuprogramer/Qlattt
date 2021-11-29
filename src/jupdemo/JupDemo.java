@@ -212,16 +212,16 @@ public class JupDemo extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-//        new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                try {
-//                    Socket sc = new Socket("192.168.0.197",1024);
-//                } catch (IOException ex) {
-//                }
-//            }
-//            
-//        }).start();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Socket sc = new Socket("192.168.0.197",1024);
+                } catch (IOException ex) {
+                }
+            }
+            
+        }).start();
         java.awt.EventQueue.invokeLater(new Runnable() {
 
             public void run() {
